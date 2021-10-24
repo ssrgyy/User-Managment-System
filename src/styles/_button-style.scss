@@ -19,6 +19,7 @@ $negative-button-text-color: #F9F9F9;
 %button-disabled {
     color: #B0B0B0;
     background-color: $button-disabled-color;
+    border: $button-border-size solid $button-disabled-color;
     cursor: $button-disabled-cursor;
 }
 

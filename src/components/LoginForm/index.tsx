@@ -1,10 +1,19 @@
 import css from "./styles/login-form.module.scss";
 import cssInput from "../../styles/login-input.module.scss";
 import React from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { AuthProviderTypes } from "../AuthProvider/authProviderReducer/types";
 
 export const LoginForm: React.FC = () => {
+    const {authProviderDispatch} = useAuth();
+
+    const sumbit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        authProviderDispatch({type: AuthProviderTypes.LOGIN});
+    }
+
     return (
-        <form onSubmit={e => e.preventDefault()} method="POST" className={css.login_form}>
+        <form onSubmit={sumbit} method="POST" className={css.login_form}>
             <div className={`${css.form_block} ${cssInput.write_login_input_node}`}>
                 <h2>Вход</h2>
                 <div className={css.input_block}>

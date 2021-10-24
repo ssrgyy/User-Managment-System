@@ -1,57 +1,89 @@
 import css from "./styles/user-list.module.scss";
 import cssButton from "../../styles/button.module.scss";
-import React, { useState } from "react";
+import React, { ReactElement, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { UserTable } from "../../components/UserTable";
 import { HeaderPage } from "../../components/HeaderPage";
 import { UserTableData } from "../../components/UserTable/types";
-import { userTestData } from "../../components/UserManager/data";
+import axios from "axios";
+import { UserListResponseData } from "./types";
+
+interface Test {
+    test: number;
+}
 
 export const UserList: React.FC = () => {
-    const userTableDataList: UserTableData = {
+    const [currentPageNumber, setCurrentPageNumber] = useState<number>(0);
+    const [userTableData, setUserTableData] = useState<UserTableData>({
         headerItemNameList: ['ФИО', 'Город'],
         itemDataList: []
-    }
+    });
 
-    const [currentPageNumber, setCurrentPageNumber] = useState<number>(0);
-    const elementsOnPage: number = 5;
-    const elementsCount: number = userTestData[0].length;
+    useEffect(() => loadUsers(), [currentPageNumber]);
 
-    for (let i = elementsOnPage * currentPageNumber,
-        temp = elementsOnPage * (currentPageNumber + 1),
-        max = temp < elementsCount ? temp : elementsCount; i < max ; i++) {
-            const itemListData: string[] = [];
-
-            for (let j = 0; j < userTestData.length; j++)
-                itemListData.push(userTestData[j][i]);
-
-            userTableDataList.itemDataList.push({
-                itemNameList: itemListData
-            });
-    }
-
+    useEffect(() => {
+        if (userTableData.itemDataList.length === 0)
+            setCurrentPageNumber(0);
+    }, [userTableData]);
+    
     const addPageNumber = (number: number) => setCurrentPageNumber(prevState => {
         let newPageNumber: number = prevState + number;
-        const pageCount: number = Math.ceil(elementsCount / elementsOnPage);
 
         if (newPageNumber < 0)
-            newPageNumber = pageCount - 1;
-        else if (newPageNumber >= pageCount)
             newPageNumber = 0;
 
         return newPageNumber;
     });
+
+    const loadUsers = () => {
+        axios.post<UserListResponseData>('http://localhost:5000/user_list', {
+            elementsOnPage: 5,
+            page: currentPageNumber
+        }).then(res => {
+            setUserTableData(prevState => {
+                const newUserTableData: UserTableData = {...prevState, itemDataList: []};
+
+                res.data.forEach(data => {
+                    newUserTableData.itemDataList.push({
+                        itemNameList: [data.user.fio, data.city.name]
+                    });
+                });
+
+                return newUserTableData;
+            });
+        });
+    }
+
+    const userTable: ReactNode = useMemo(() => {
+        if (userTableData.itemDataList.length === 0)
+            return null;
+
+        return <UserTable isScrolled={true} data={userTableData}/>;
+    }, [userTableData]);
+
+    const backButton: ReactElement = useMemo(() => (
+        <button onClick={addPageNumber.bind(null, -1)}>
+            &#8592;
+        </button>
+    ), []);
+
+    const disabledBackButton: ReactElement = useMemo(() => (
+        <button disabled onClick={addPageNumber.bind(null, -1)}>
+            &#8592;
+        </button>
+    ), []);
     
     return (
         <HeaderPage title="Список пользователей">
             <div className={css.user_list}>
-                <button className={`${css.add_user_button} ${cssButton.secondary_button}`}>
+                <button className={`${css.add_user_button} ${cssButton.secondary_button}`} onClick={loadUsers}>
                     Добавить пользователя
                 </button>
+                <h1>Страница: {currentPageNumber + 1}</h1>
                 <div className={css.user_table}>
-                    <UserTable elementsOnPage={elementsOnPage} isScrolled={true} data={userTableDataList}/>
+                    {userTable}
                 </div>
                 <div className={`${css.page_button_block} ${cssButton.secondary_button_parent}`}>
-                    <button onClick={addPageNumber.bind(null, -1)}>&#8592;</button>
+                    {currentPageNumber < 1 ? disabledBackButton : backButton}
                     <button onClick={addPageNumber.bind(null, 1)}>&#8594;</button>
                 </div>
             </div>

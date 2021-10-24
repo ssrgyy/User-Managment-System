@@ -2,11 +2,15 @@ import css from "./styles/header.module.scss";
 import cssButton from "./../../styles/button.module.scss";
 import React from "react";
 import { HeaderProps } from "./types";
+import { useAuth } from "../../hooks/useAuth";
+import { AuthProviderTypes } from "../AuthProvider/authProviderReducer/types";
 
 const userName: string = "Иванов Иван Иванович";
 
-export const Header: React.FC<HeaderProps> = ({title}) => {
-
+export const Header: React.FC<HeaderProps> = ({title}) => {    
+    const {authProviderDispatch} = useAuth();
+    const logout = () => authProviderDispatch({type: AuthProviderTypes.LOGOUT});
+    
     return (
         <div className={css.header}>
             <div className={css.header_content}>
@@ -21,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({title}) => {
                     </div>
                     <div>
                         <button className={`${cssButton.secondary_button} ${css.logout_button}`}
-                            id={css.logout_button}>
+                            id={css.logout_button} onClick={logout}>
                             Выйти
                         </button>
                     </div>

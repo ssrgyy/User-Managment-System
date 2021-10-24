@@ -2,8 +2,8 @@ import React, { ReactElement, useContext } from "react";
 import css from "./styles/table-header-item.module.scss";
 import cssTable from "../../styles/user-table.module.scss";
 import { SortMode } from "../../types";
-import { TableHeaderContext } from "../TableHeader";
 import { TableHeaderItemProps } from "./types";
+import { TableHeaderContext } from "../TableHeader/TableHeaderContext";
 
 export const TableHeaderItem: React.FC<TableHeaderItemProps> = ({children, id}) => {
     const {onSort, sortData} = useContext(TableHeaderContext);

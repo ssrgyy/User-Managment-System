@@ -7,7 +7,7 @@ import { TableItem } from "./components/TableItem";
 
 export const UserTable: React.FC<UserTableProps> = ({data, isScrolled, elementsOnPage}) => {
     const [isDataUpdated, setIsDataUpdated] = useState<boolean>(false);
-    const [dataList, setDataList] = useState<UserTableData>({headerItemNameList: [], itemDataList: []});
+    const [dataList, setDataList] = useState<UserTableData>({headerItemNameList: [], itemDataList: [{itemNameList: []}]});
     const [sortData, setSortData] = useState<SortData>({
         mode: SortMode.Ascend,
         itemId: 0
@@ -26,7 +26,7 @@ export const UserTable: React.FC<UserTableProps> = ({data, isScrolled, elementsO
         setIsDataUpdated(false);
     }, [isDataUpdated]);
 
-    const sort = (newSortData: SortData) => setDataList(prevState => {
+    const sort = (newSortData: SortData) => setDataList(prevState => {        
         const newDataList: UserTableData = {...prevState};
         const sortResult: number = newSortData.mode === SortMode.Ascend ? 1 : -1;
         const {itemId} = newSortData;
@@ -76,7 +76,7 @@ export const UserTable: React.FC<UserTableProps> = ({data, isScrolled, elementsO
                         return null;
 
                     return (
-                        <TableItem key={itemData.itemNameList[0] + index.toString()}
+                        <TableItem key={'TableItem' + index}
                             onAddClick={itemData.onAddClick}
                             onDeleteClick={itemData.onDeleteClick}>
                             {itemData.itemNameList}
