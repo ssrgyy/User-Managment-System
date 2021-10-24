@@ -1,0 +1,49 @@
+@import "./colors";
+@import "./button-style";
+
+.write_login_input_node input[type="text"],
+.write_login_input_node input[type="password"],
+.write_login_input_parent > input[type="text"],
+.write_login_input_parent > input[type="password"],
+.write_login_input {
+    outline: none;
+    border: 2px solid #767676;
+    background-color: #FFFFFF;
+
+    &:focus {
+        border-color: $secondary-color;
+        box-shadow: 0 0 10px 0 rgba($secondary-color, 0.5);
+    }
+}
+
+.sumbit_login_input_node input[type="submit"],
+.submit_login_input_parent > input[type="submit"],
+.submit_login_input {
+    outline: none;
+    background-color: $background-color;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7);
+    border: 2px solid $background-color;
+    border-radius: 40px;
+    color: #000000;
+
+    &:enabled {
+        cursor: $button-cursor;
+    }
+
+    &:disabled {
+        border-color: $button-disabled-color;
+        @extend %button-disabled;
+    }
+
+    &:hover:enabled {
+        background-color: $secondary-color;
+        border-color: $secondary-color;
+        color: $secondary-button-text-color;
+    }
+
+    &:active:enabled {
+        background-color: $secondary-button-text-color;
+        border-color: $secondary-color;
+        color: $secondary-color;
+    }
+}

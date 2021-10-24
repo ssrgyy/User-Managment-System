@@ -1,0 +1,28 @@
+.select_block {
+    display: flex;
+    width: 100%;
+    border: 3px solid #CCCCCC;
+    background-color: #FFFFFF;
+    height: 40px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    &:hover {
+        border-color: #333333;
+    }
+}
+
+.button_block {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 100%;
+
+    > button {
+        width: 32px;
+        height: 80%;
+        margin-right: 5px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+    }
+}

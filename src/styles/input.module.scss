@@ -1,0 +1,14 @@
+.write_input_node input[type="text"],
+.write_input_node input[type="password"],
+.write_input_parent > input[type="text"],
+.write_input_parent > input[type="password"],
+.write_input {
+    outline: none;
+    border: 2px solid #767676;
+    text-indent: 5px;
+
+    &:focus {
+        border-color: #000000;
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.7);
+    }
+}

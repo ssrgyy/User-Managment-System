@@ -1,0 +1,86 @@
+@import "../styles/colors";
+@import "../styles/button-style";
+
+.secondary_button_node button, .secondary_button_parent > button, .secondary_button {
+    background-color: $secondary-color;
+    border: $button-border-size solid $secondary-button-border-color;
+    @include button-box-shadow($button-shadow-color);
+    color: $secondary-button-text-color;
+
+    @extend %button-style;
+
+    &:enabled {
+        cursor: $button-cursor;
+    }
+
+    &:disabled {
+        @extend %button-disabled;
+    }
+
+    &:hover:enabled, &:focus {
+        background-color: $secondary-color;
+        border-color: #F9F9F9;
+    }
+
+    &:active:enabled {
+        background-color: $primary-color;
+        border-color: $secondary-button-border-color;
+        color: $primary-button-border-color;
+    }
+}
+
+.primary_button_node button, .primary_button_parent > button, .primary_button {
+    background-color: $primary-color;
+    border: $button-border-size solid $primary-color;
+    @include button-box-shadow($button-shadow-color);
+    color: $primary-button-border-color;
+
+    @extend %button-style;
+
+    &:enabled {
+        cursor: $button-cursor;
+    }
+
+    &:disabled {
+        @extend %button-disabled;
+    }
+
+    &:hover:enabled, &:focus {
+        border-color: $primary-button-border-color;
+    }   
+
+    &:active:enabled {
+        background-color: $primary-button-border-color;
+        border-color: $primary-button-border-color;
+        color: $primary-color;
+    }
+}
+
+
+
+.negative_button_node button, .negative_button_parent > button, .negative_button {
+    background-color: $negative-button-color;
+    border: $button-border-size solid $negative-button-color;
+    @include button-box-shadow($button-shadow-color);
+    color: $negative-button-text-color;
+
+    @extend %button-style;
+
+    &:enabled {
+        cursor: $button-cursor;
+    }
+
+    &:disabled {
+        @extend %button-disabled;
+    }
+
+    &:hover:enabled, &:focus {
+        border-color: $negative-button-text-color;
+    }   
+
+    &:active:enabled {
+        background-color: $negative-button-text-color;
+        border-color: $negative-button-color;
+        color: $negative-button-color;
+    }
+}

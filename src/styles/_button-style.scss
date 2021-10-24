@@ -1,0 +1,27 @@
+$button-disabled-color: #DEDEDE;
+$button-shadow-color: rgba(0, 0, 0, 0.5);
+$button-border-size: 2px;
+$button-cursor: pointer;
+$button-disabled-cursor: default;
+$primary-button-text-color: #808080;
+$primary-button-border-color: $primary-button-text-color;
+$secondary-button-border-color: #127B0A;
+$secondary-button-text-color: #F9F9F9;
+$negative-button-color: #DC143C;
+$negative-button-text-color: #F9F9F9;
+
+%button-style {
+    border-radius: 10px;
+    outline: none;
+    user-select: none;
+}
+
+%button-disabled {
+    color: #B0B0B0;
+    background-color: $button-disabled-color;
+    cursor: $button-disabled-cursor;
+}
+
+@mixin button-box-shadow($color) {
+    box-shadow: 0 0 3px 0 rgba($color, 0.5);
+}

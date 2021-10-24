@@ -1,0 +1,58 @@
+$header-text-offset: 2px;
+$header-text-color: #434343;
+
+.user_table {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #E5E5E5;
+    overflow: hidden;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    user-select: none;
+
+    .cell {
+        cursor: pointer;
+
+        &:hover {
+            > p {
+                margin-bottom: 0;
+                border-bottom: $header-text-offset solid $header-text-color;
+            }
+        }
+    }
+
+    p {
+        color: $header-text-color;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: $header-text-offset;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: 20%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.cell.empty {
+    cursor: default;
+}
