@@ -59,8 +59,8 @@
 
 
 .negative_button_node button, .negative_button_parent > button, .negative_button {
-    background-color: $negative-button-color;
-    border: $button-border-size solid $negative-button-color;
+    background-color: $negative-color;
+    border: $button-border-size solid $negative-color;
     @include button-box-shadow($button-shadow-color);
     color: $negative-button-text-color;
 
@@ -80,7 +80,7 @@
 
     &:active:enabled {
         background-color: $negative-button-text-color;
-        border-color: $negative-button-color;
-        color: $negative-button-color;
+        border-color: $negative-color;
+        color: $negative-color;
     }
 }

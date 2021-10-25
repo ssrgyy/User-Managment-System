@@ -1,12 +1,14 @@
 @import "../../../styles/colors";
 
+$text-color: #434343;
+
 .user_list {
     display: flex;
     flex-direction: column;
 
     h1 {
         margin-top: 15px;
-        color: #434343;
+        color: $text-color;
     }
 }
 
@@ -21,6 +23,7 @@
     width: 100%;
     height: 355px;
     margin-top: 20px;
+    background-color: #E5E5E5;
 }
 
 .page_button_block {
@@ -38,5 +41,68 @@
 
     &:last-child {
         margin-right: 0;
+    }
+}
+
+.loading_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+    color: $text-color;
+}
+
+.modal_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #E5E5E5;
+}
+
+.modal_form_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    h2 {
+        margin-top: 30px;
+        font-size: 2.5rem;
+    }
+}
+
+.modal_form_text_block {
+    margin-top: 20px;
+
+    p {
+        margin-top: 10px;
+        font-size: 1.7rem;
+    }
+}
+
+.modal_form_button_block {
+    display: flex;
+    width: 100%;
+    height: 15%;
+}
+
+.modal_form_button_block > button {
+    width: 100%;
+    margin-bottom: 10px;
+
+    &:first-child {
+        margin-left: 10px;
+        margin-right: 5px;
+    }
+
+    &:last-child {
+        margin-right: 10px;
+        margin-left: 5px;
     }
 }

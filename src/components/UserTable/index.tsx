@@ -5,7 +5,7 @@ import { TableHeader } from "./components/TableHeader";
 import { TableHeaderItem } from "./components/TableHeaderItem";
 import { TableItem } from "./components/TableItem";
 
-export const UserTable: React.FC<UserTableProps> = ({data, isScrolled, elementsOnPage}) => {
+export const UserTable: React.FC<UserTableProps> = ({data, isScrolled}) => {
     const [isDataUpdated, setIsDataUpdated] = useState<boolean>(false);
     const [dataList, setDataList] = useState<UserTableData>({headerItemNameList: [], itemDataList: [{itemNameList: []}]});
     const [sortData, setSortData] = useState<SortData>({
@@ -71,18 +71,13 @@ export const UserTable: React.FC<UserTableProps> = ({data, isScrolled, elementsO
                     ))}
                     <div className={`${css.cell} ${css.empty}`}/>
                 </TableHeader>
-                {dataList.itemDataList.map((itemData, index) => {
-                    if (elementsOnPage != undefined && elementsOnPage <= index)
-                        return null;
-
-                    return (
-                        <TableItem key={'TableItem' + index}
-                            onAddClick={itemData.onAddClick}
-                            onDeleteClick={itemData.onDeleteClick}>
-                            {itemData.itemNameList}
-                        </TableItem>
-                    );
-                })}
+                {dataList.itemDataList.map((itemData, index) => (
+                    <TableItem key={'TableItem' + index}
+                        onAddClick={itemData.onAddClick}
+                        onDeleteClick={itemData.onDeleteClick}>
+                        {itemData.itemNameList}
+                    </TableItem>
+                ))}
             </div>
         </div>
     );

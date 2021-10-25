@@ -1,9 +1,10 @@
 import { Reducer } from "react";
+import { UUID } from "../../../uuid/types";
 
 export interface AuthProviderState {
     isAuth: boolean;
-    id?: string;
-    name?: string;
+    userId?: string;
+    userFio?: string;
 }
 
 export enum AuthProviderTypes {
@@ -11,8 +12,14 @@ export enum AuthProviderTypes {
     LOGOUT = 'LOGOUT'
 }
 
+export interface AuthProviderLoginPayload {
+    userId: UUID;
+    userFio: string;
+}
+
 export interface AuthProviderLoginAction {
     type: AuthProviderTypes.LOGIN;
+    payload: AuthProviderLoginPayload;
 }
 
 export interface AuthProviderLogoutAction {
@@ -24,4 +31,4 @@ export type AuthProviderAction =
     | AuthProviderLogoutAction;
 
 export type AuthProviderReducer = Reducer<AuthProviderState, AuthProviderAction>;
-export type AuthProviderFunc = AuthProviderReducer;
+export type AuthProviderFunc = (state: AuthProviderState) => AuthProviderState;

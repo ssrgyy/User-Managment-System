@@ -5,12 +5,11 @@ import { HeaderProps } from "./types";
 import { useAuth } from "../../hooks/useAuth";
 import { AuthProviderTypes } from "../AuthProvider/authProviderReducer/types";
 
-const userName: string = "Иванов Иван Иванович";
-
 export const Header: React.FC<HeaderProps> = ({title}) => {    
-    const {authProviderDispatch} = useAuth();
+    const {authProviderState, authProviderDispatch} = useAuth();
+    const userName = authProviderState.userFio || '';
     const logout = () => authProviderDispatch({type: AuthProviderTypes.LOGOUT});
-    
+
     return (
         <div className={css.header}>
             <div className={css.header_content}>

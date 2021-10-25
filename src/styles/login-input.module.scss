@@ -1,19 +1,35 @@
 @import "./colors";
 @import "./button-style";
 
+$write-login-input-border-size: 2px;
+
+@mixin write-login-input-box-shadow($color) {
+    box-shadow: 0 0 10px 0 rgba($color, 0.5);
+}
+
 .write_login_input_node input[type="text"],
 .write_login_input_node input[type="password"],
 .write_login_input_parent > input[type="text"],
 .write_login_input_parent > input[type="password"],
 .write_login_input {
     outline: none;
-    border: 2px solid #767676;
+    border: $write-login-input-border-size solid #767676;
     background-color: #FFFFFF;
 
     &:focus {
         border-color: $secondary-color;
         box-shadow: 0 0 10px 0 rgba($secondary-color, 0.5);
+        @include write-login-input-box-shadow($secondary-color);
     }
+}
+
+.wrong_write_login_input_node input[type="text"],
+.wrong_write_login_input_node input[type="password"],
+.wrong_write_login_input_parent > input[type="text"],
+.wrong_write_login_input_parent > input[type="password"],
+.wrong_write_login_input {
+    border: $write-login-input-border-size solid $negative-color;
+    @include write-login-input-box-shadow($negative-color);
 }
 
 .sumbit_login_input_node input[type="submit"],

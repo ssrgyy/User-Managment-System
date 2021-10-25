@@ -2,6 +2,8 @@
 .write_input_node input[type="password"],
 .write_input_parent > input[type="text"],
 .write_input_parent > input[type="password"],
+.write_input_node select,
+.write_input_parent > select,
 .write_input {
     outline: none;
     border: 2px solid #767676;

@@ -1,8 +1,10 @@
-import { City, User } from "../../components/UserManager/types";
+import { UUID } from "../../uuid/types";
 
-export interface UserListResponseDataObject {
-    user: User;
-    city: City;
+export interface LoadUserRequestData {
+    elementsOnPage: number;
+    page: number;
 }
 
-export type UserListResponseData = UserListResponseDataObject[];
+export interface DeleteUserRequestData {
+    id: UUID;
+}

@@ -27,5 +27,4 @@ export enum SortMode {
 export interface UserTableProps {
     data: UserTableData;
     isScrolled?: boolean;
-    elementsOnPage?: number;
 }

@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { authProviderReducer, authProviderState } from "./authProviderReducer";
-import { AuthProviderReducer, AuthProviderTypes } from "./authProviderReducer/types";
+import { AuthProviderReducer } from "./authProviderReducer/types";
 
 export const AuthProvider: React.FC = ({children}) => {
-    const [state, dispatch] = useReducer<AuthProviderReducer>(authProviderReducer, authProviderState);
-
-    useEffect(() => {
-        
-    }, []);
+    const [state, dispatch] = useReducer<AuthProviderReducer>(authProviderReducer, authProviderState);    
 
     return (
         <AuthContext.Provider value={
