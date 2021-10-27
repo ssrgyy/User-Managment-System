@@ -1,17 +1,20 @@
 import './App.scss';
 import React from 'react';
-import { AppRouter } from './components/AppRouter';
+import { RequestStatus } from './components/RequestStatus';
 import { AuthProvider } from './components/AuthProvider';
 import { UserManager } from './components/UserManager';
+import { AppRouter } from './components/AppRouter';
 
 export const App: React.FC = () => {
     return (
         <div className="App">
-            <AuthProvider>
-                <UserManager>
-                    <AppRouter/>
-                </UserManager>
-            </AuthProvider>
+            <RequestStatus>
+                <AuthProvider>
+                    <UserManager>
+                        <AppRouter/>
+                    </UserManager>
+                </AuthProvider>
+            </RequestStatus>
         </div>
     );
 }

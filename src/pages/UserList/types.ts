@@ -1,4 +1,10 @@
+import { UserData } from "../../components/UserManager/types";
 import { UUID } from "../../uuid/types";
+
+export interface LoadUserResponseData {
+    page: number;
+    pageData: UserData[];
+}
 
 export interface LoadUserRequestData {
     elementsOnPage: number;
@@ -6,5 +12,5 @@ export interface LoadUserRequestData {
 }
 
 export interface DeleteUserRequestData {
-    id: UUID;
+    userId: UUID;
 }

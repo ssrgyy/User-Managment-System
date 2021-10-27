@@ -1,11 +1,13 @@
 [
     {
-        "id": "23c5e041-364e-4ecb-817a-39c4d87738d1",
+        "regId": "7dd8fc92-a144-4694-837d-7c44c10b6841",
+        "userFio": "Иванов Иван Иванович",
         "login": "test",
         "password": "test"
     },
     {
-        "id": "1856d233-fe1c-4ff3-9567-97a92e97f949",
+        "regId": "7226cdcf-ddb8-4162-ae71-cc164e5dcf43",
+        "userFio": "Маркова Кира Валерьевна",
         "login": "test2",
         "password": "test2"
     }

@@ -5,7 +5,7 @@ import { TableHeader } from "./components/TableHeader";
 import { TableHeaderItem } from "./components/TableHeaderItem";
 import { TableItem } from "./components/TableItem";
 
-export const UserTable: React.FC<UserTableProps> = ({data, isScrolled}) => {
+export const UserTable: React.FC<UserTableProps> = ({data}) => {
     const [isDataUpdated, setIsDataUpdated] = useState<boolean>(false);
     const [dataList, setDataList] = useState<UserTableData>({headerItemNameList: [], itemDataList: [{itemNameList: []}]});
     const [sortData, setSortData] = useState<SortData>({
@@ -61,7 +61,7 @@ export const UserTable: React.FC<UserTableProps> = ({data, isScrolled}) => {
     });
 
     return (
-        <div className={css.user_table} style={isScrolled ? {overflow: 'auto'} : undefined}>
+        <div className={css.user_table}>
             <div className={css.table}>
                 <TableHeader onSort={sortHandler} sortData={sortData}>
                     {dataList.headerItemNameList.map((headerItem, index) => (

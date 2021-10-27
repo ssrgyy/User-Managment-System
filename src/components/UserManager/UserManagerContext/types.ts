@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
-import { UserManagerState } from "../types";
+import { Dispatch } from "react";
+import { UserManagerAction, UserManagerState } from "../userManagerReducer/types";
 
 export interface UserManagerContextProviderData {
-    currentUser: UserManagerState;
-    setCurrentUser: Dispatch<SetStateAction<UserManagerState>>;
+    userManagerState: UserManagerState;
+    userManagerDispatch: Dispatch<UserManagerAction>;
 }

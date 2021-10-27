@@ -1,56 +1,67 @@
 import css from "./styles/user-form.module.scss";
 import cssInput from "../../styles/input.module.scss";
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import { City } from "../UserManager/types";
-import { useInput } from "../../hooks/useInput";
-import { useSelect } from "../../hooks/useSelect";
+import cssButton from "../../styles/button.module.scss";
+import React, { useRef, useState } from "react";
 import { UserFormProps } from "./types";
+import { useUserManager } from "../../hooks/useUserManager";
 
-export const UserForm: React.FC<UserFormProps> = ({children, onSumbit}) => {
-    const [cityDataList, setCityDataList] = useState<City[]>([]);
-    const nameInput = useInput('');
-    const selectInput = useSelect(0);
+export const UserForm: React.FC<UserFormProps> = ({children, onSubmit, defaultSumbitValue, userFio, cityName}) => {
+    const [isWrong, setIsWrong] = useState<boolean>(false);
+    const {userManagerState, userManagerDispatch} = useUserManager();
+    const fioInputRef = useRef<HTMLInputElement>(null);
+    const citySelectRef = useRef<HTMLSelectElement>(null);
 
-    useEffect(() => loadCities(), []);
+    const inputChange = () => setIsWrong(false);
 
-    const loadCities = () => {
-        axios.post<City[]>('http://localhost:5000/cities').then(res => {
-            setCityDataList(res.data);
-        });
+    const isValid = (): boolean => {
+        if (fioInputRef.current && citySelectRef.current) {
+            if (fioInputRef.current.value.length > 0)
+                return true;
+        }
+
+        return false;
     }
 
-    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    const sumbit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        axios.put('http://localhost:5000/add_user', {
-            fio: nameInput.value,
-            cityId: cityDataList[selectInput.index].id
+        if (!isValid()) {
+            setIsWrong(true);
+            return;
+        }
+
+        const userCity = userManagerState.cityList[citySelectRef.current!.selectedIndex];
+
+        onSubmit?.call(null, event, {
+            userFio: fioInputRef.current!.value,
+            cityListIndex: citySelectRef.current!.selectedIndex,
+            cityId: userCity.id,
+            cityName: userCity.name
         });
     }
 
-    const cityOptionList: ReactElement = useMemo(() => (
-        <>
-            {cityDataList.map(cityData => <option key={cityData.id}>{cityData.name}</option>)}
-        </>
-    ), [cityDataList]);
+    const wrongInputNodeClass: string = isWrong ? cssInput.wrong_write_input_node : '';
 
     return (
-        <form onSubmit={submit} method="POST"
-            className={css.user_form}>
-            <div className={`${css.input_block} ${cssInput.write_input_node}`}>
+        <form onSubmit={sumbit} className={css.user_form}>
+            <div className={`${wrongInputNodeClass} ${css.input_block} ${cssInput.write_input_node}`}>
                 <label>
                     <p>ФИО:</p>
-                    <input type="text" name="name" {...nameInput}/>
+                    <input type="text" defaultValue={userFio}
+                        ref={fioInputRef} onChange={inputChange}/>
                 </label>
                 <label>
                     <p>Город:</p>
-                    <select name="city" onChange={selectInput.onChange}>
-                        {cityOptionList}
+                    <select defaultValue={cityName} ref={citySelectRef}>
+                        {userManagerState.cityList.map(cityData => (
+                            <option key={cityData.id}>{cityData.name}</option>
+                        ))}
                     </select>
                 </label>
             </div>
-            {children}
+            {React.Children.count(children) !== 0 ? children :
+                <input type="submit" value={defaultSumbitValue || 'Отправить'}
+                    className={`${css.default_submit_button} ${cssButton.secondary_button}`}/>}
         </form>
     );
 }

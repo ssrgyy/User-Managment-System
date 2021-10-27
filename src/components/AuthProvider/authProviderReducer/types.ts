@@ -3,7 +3,7 @@ import { UUID } from "../../../uuid/types";
 
 export interface AuthProviderState {
     isAuth: boolean;
-    userId?: string;
+    regId?: UUID;
     userFio?: string;
 }
 

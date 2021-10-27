@@ -4,11 +4,11 @@ export const authProviderState: AuthProviderState = {
     isAuth: false
 };
 
-export const login = (state: AuthProviderState, payload: AuthProviderLoginPayload): AuthProviderState => {
+const login = (state: AuthProviderState, payload: AuthProviderLoginPayload): AuthProviderState => {
     return {...state, ...payload, isAuth: true};
 }
 
-export const logout: AuthProviderFunc = (state) => {
+const logout: AuthProviderFunc = (state) => {
     return {isAuth: false};
 }
 
